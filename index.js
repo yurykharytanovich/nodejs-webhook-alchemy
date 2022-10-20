@@ -3,7 +3,7 @@ const cors = require("cors");
 const express = require("express");
 const webhookHelper = require("./webhookController");
 const app = express();
-const port = 5000;
+const port = 3200;
 
 app.use(bodyParser.json());
 app.use(bodyParser.text());
@@ -28,6 +28,10 @@ const processWebhook = (request) => {
 app.post("/passbase-webhooks", (req, res) => {
   processWebhook(req);
   res.status(200).send("Success");
+});
+
+app.get("/health", (req, res) => {
+  res.status(200).send("Healthy");
 });
 
 app.listen(port, () => {
